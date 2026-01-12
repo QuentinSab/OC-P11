@@ -1,5 +1,6 @@
 import json
 from flask import Flask,render_template,request,redirect,flash,url_for
+from logic.logic import get_club_by_email
 
 
 def loadClubs():
@@ -26,7 +27,13 @@ def index():
 
 @app.route('/showSummary',methods=['POST'])
 def showSummary():
-    club = [club for club in clubs if club['email'] == request.form['email']][0]
+    email = request.form["email"]
+    club = get_club_by_email(email, clubs)
+
+    if club is None:
+        flash("Email invalide")
+        return render_template("index.html")
+
     return render_template('welcome.html',club=club,competitions=competitions)
 
 

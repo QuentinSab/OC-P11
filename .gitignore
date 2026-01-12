@@ -3,7 +3,6 @@ include
 lib
 env
 .Python
-tests/
 .envrc
 __pycache__
 .pytest_cache
