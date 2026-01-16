@@ -1,0 +1,9 @@
+[run]
+source = server, logic
+omit =
+    tests/*
+    */__init__.py
+    conftest.py
+
+[report]
+show_missing = True
