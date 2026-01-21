@@ -18,3 +18,7 @@ def get_club_by_email(email, clubs):
         if club["email"] == email:
             return club
     return None
+
+
+def can_book_places(club, places_requested):
+    return club["points"] >= places_requested

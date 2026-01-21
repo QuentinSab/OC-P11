@@ -2,9 +2,17 @@ import pytest
 import threading
 import time
 
+import server
 from server import app
+from logic.logic import loadCompetitions, loadClubs
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+
+
+@pytest.fixture(autouse=True)
+def reset_data():
+    server.clubs = loadClubs()
+    server.competitions = loadCompetitions()
 
 
 @pytest.fixture
