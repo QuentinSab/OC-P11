@@ -21,4 +21,4 @@ def get_club_by_email(email, clubs):
 
 
 def can_book_places(club, places_requested):
-    return club["points"] >= places_requested
+    return int(club["points"]) >= places_requested

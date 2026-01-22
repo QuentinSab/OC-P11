@@ -18,7 +18,7 @@ def test_book_places_fails_when_not_enough_points(client):
         },
         follow_redirects=True
     )
-
+    assert response.status_code == 200
     assert b"Pas assez de points disponibles." in response.data
 
 
@@ -39,5 +39,5 @@ def test_book_places_succeeds_when_enough_points(client):
         },
         follow_redirects=True
     )
-
+    assert response.status_code == 200
     assert b"Les places ont bien ete reservees." in response.data
