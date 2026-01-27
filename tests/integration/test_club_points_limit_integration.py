@@ -14,7 +14,7 @@ def test_book_places_fails_when_not_enough_points(client):
         data={
             "club": "Club Test",
             "competition": "Spring Festival",
-            "places": "20"
+            "places": "12"
         },
         follow_redirects=True
     )

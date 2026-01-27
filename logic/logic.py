@@ -26,3 +26,7 @@ def can_book_places(club, places_requested):
 
 def has_enough_places(competition, places_requested):
     return int(places_requested) <= int(competition["numberOfPlaces"])
+
+
+def respects_max_places_per_booking(places_requested, max_places=12):
+    return int(places_requested) <= max_places

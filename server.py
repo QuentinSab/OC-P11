@@ -1,5 +1,12 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
-from logic.logic import loadCompetitions, loadClubs, get_club_by_email, can_book_places, has_enough_places
+from logic.logic import (
+    loadCompetitions,
+    loadClubs,
+    get_club_by_email,
+    can_book_places,
+    has_enough_places,
+    respects_max_places_per_booking,
+)
 
 
 app = Flask(__name__)
@@ -42,6 +49,10 @@ def purchasePlaces():
     competition = [c for c in competitions if c["name"] == request.form["competition"]][0]
     club = [c for c in clubs if c["name"] == request.form["club"]][0]
     placesRequired = int(request.form["places"])
+
+    if not respects_max_places_per_booking(placesRequired):
+        flash("Impossible de reserver plus de 12 places a la fois.")
+        return render_template("booking.html", club=club, competition=competition)
 
     if not can_book_places(club, placesRequired):
         flash("Pas assez de points disponibles.")
