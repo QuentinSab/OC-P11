@@ -4,15 +4,24 @@ import time
 
 import server
 from server import app
-from logic.logic import loadCompetitions, loadClubs
+from unittest.mock import patch
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
 
 @pytest.fixture(autouse=True)
-def reset_data():
-    server.clubs = loadClubs()
-    server.competitions = loadCompetitions()
+def reset_data(request):
+    if "integration" in request.fspath.dirname:
+        with patch("logic.logic.open", create=True):
+            server.clubs = [{"name": "Club Test", "points": 10, "email": "test@mail.com"}]
+            server.competitions = [{
+                "name": "Spring Festival",
+                "date": "2030-01-01 10:00:00",
+                "numberOfPlaces": 25
+            }]
+            yield
+    else:
+        yield
 
 
 @pytest.fixture

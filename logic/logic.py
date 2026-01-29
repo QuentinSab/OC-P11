@@ -14,6 +14,16 @@ def loadCompetitions():
         return listOfCompetitions
 
 
+def saveClubs(clubs, path="clubs.json"):
+    with open(path, "w") as c:
+        json.dump({"clubs": clubs}, c, indent=4)
+
+
+def saveCompetitions(competitions, path="competitions.json"):
+    with open(path, "w") as comps:
+        json.dump({"competitions": competitions}, comps, indent=4)
+
+
 def get_club_by_email(email, clubs):
     for club in clubs:
         if club["email"] == email:

@@ -7,6 +7,8 @@ from logic.logic import (
     has_enough_places,
     respects_max_places_per_booking,
     competition_is_not_past,
+    saveClubs,
+    saveCompetitions
 )
 
 
@@ -69,6 +71,9 @@ def purchasePlaces():
 
     club["points"] = int(club["points"]) - placesRequired
     competition["numberOfPlaces"] = int(competition["numberOfPlaces"]) - placesRequired
+
+    saveClubs(clubs)
+    saveCompetitions(competitions)
 
     flash("Les places ont bien ete reservees.")
     return render_template("welcome.html", club=club, competitions=competitions)
