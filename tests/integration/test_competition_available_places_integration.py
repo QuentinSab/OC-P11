@@ -1,9 +1,14 @@
 import server
+from datetime import datetime, timedelta
 
 
 def test_booking_fails_when_requesting_more_than_available(client):
     server.clubs = [{"name": "Club Test", "points": 10}]
-    server.competitions = [{"name": "Spring Festival", "numberOfPlaces": 5}]
+    server.competitions = [{
+        "name": "Spring Festival",
+        "numberOfPlaces": 5,
+        "date": (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    }]
 
     response = client.post(
         "/purchasePlaces",
@@ -16,7 +21,11 @@ def test_booking_fails_when_requesting_more_than_available(client):
 
 def test_booking_succeeds_when_requesting_up_to_available_places(client):
     server.clubs = [{"name": "Club Test", "points": 10}]
-    server.competitions = [{"name": "Spring Festival", "numberOfPlaces": 5}]
+    server.competitions = [{
+        "name": "Spring Festival",
+        "numberOfPlaces": 5,
+        "date": (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    }]
 
     response = client.post(
         "/purchasePlaces",
@@ -29,7 +38,11 @@ def test_booking_succeeds_when_requesting_up_to_available_places(client):
 
 def test_booking_succeeds_when_requesting_less_than_available_places(client):
     server.clubs = [{"name": "Club Test", "points": 10}]
-    server.competitions = [{"name": "Spring Festival", "numberOfPlaces": 5}]
+    server.competitions = [{
+        "name": "Spring Festival",
+        "numberOfPlaces": 5,
+        "date": (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    }]
 
     response = client.post(
         "/purchasePlaces",

@@ -1,13 +1,16 @@
 import server
+from datetime import datetime, timedelta
 
 
 def test_booking_fails_when_requesting_more_than_12_places(client):
     server.clubs = [
         {"name": "Club Test", "points": 20}
     ]
-    server.competitions = [
-        {"name": "Spring Festival", "numberOfPlaces": 30}
-    ]
+    server.competitions = [{
+        "name": "Spring Festival",
+        "numberOfPlaces": 30,
+        "date": (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    }]
 
     response = client.post(
         "/purchasePlaces",
@@ -27,9 +30,11 @@ def test_booking_succeeds_when_requesting_12_places(client):
     server.clubs = [
         {"name": "Club Test", "points": 20}
     ]
-    server.competitions = [
-        {"name": "Spring Festival", "numberOfPlaces": 30}
-    ]
+    server.competitions = [{
+        "name": "Spring Festival",
+        "numberOfPlaces": 30,
+        "date": (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    }]
 
     response = client.post(
         "/purchasePlaces",
@@ -49,9 +54,11 @@ def test_booking_succeeds_when_requesting_less_than_12_places(client):
     server.clubs = [
         {"name": "Club Test", "points": 20}
     ]
-    server.competitions = [
-        {"name": "Spring Festival", "numberOfPlaces": 30}
-    ]
+    server.competitions = [{
+        "name": "Spring Festival",
+        "numberOfPlaces": 30,
+        "date": (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    }]
 
     response = client.post(
         "/purchasePlaces",

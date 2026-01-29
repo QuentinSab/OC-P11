@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 
 
@@ -30,3 +31,11 @@ def has_enough_places(competition, places_requested):
 
 def respects_max_places_per_booking(places_requested, max_places=12):
     return int(places_requested) <= max_places
+
+
+def competition_is_not_past(competition_date_str, today=None):
+    if today is None:
+        today = datetime.now()
+
+    competition_date = datetime.strptime(competition_date_str, "%Y-%m-%d %H:%M:%S")
+    return competition_date > today

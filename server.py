@@ -6,6 +6,7 @@ from logic.logic import (
     can_book_places,
     has_enough_places,
     respects_max_places_per_booking,
+    competition_is_not_past,
 )
 
 
@@ -60,6 +61,10 @@ def purchasePlaces():
 
     if not has_enough_places(competition, placesRequired):
         flash("Pas assez de places disponibles.")
+        return render_template("booking.html", club=club, competition=competition)
+
+    if not competition_is_not_past(competition["date"]):
+        flash("Impossible de reserver pour une competition passee.")
         return render_template("booking.html", club=club, competition=competition)
 
     club["points"] = int(club["points"]) - placesRequired

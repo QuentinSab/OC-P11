@@ -1,13 +1,16 @@
 import server
+from datetime import datetime, timedelta
 
 
 def test_book_places_fails_when_not_enough_points(client):
     server.clubs = [
         {"name": "Club Test", "points": 10}
     ]
-    server.competitions = [
-        {"name": "Spring Festival", "numberOfPlaces": 25}
-    ]
+    server.competitions = [{
+        "name": "Spring Festival",
+        "numberOfPlaces": 25,
+        "date": (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    }]
 
     response = client.post(
         "/purchasePlaces",
@@ -26,9 +29,11 @@ def test_book_places_succeeds_when_enough_points(client):
     server.clubs = [
         {"name": "Club Test", "points": 10}
     ]
-    server.competitions = [
-        {"name": "Spring Festival", "numberOfPlaces": 25}
-    ]
+    server.competitions = [{
+        "name": "Spring Festival",
+        "numberOfPlaces": 25,
+        "date": (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    }]
 
     response = client.post(
         "/purchasePlaces",
