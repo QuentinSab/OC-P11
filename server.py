@@ -8,7 +8,7 @@ from logic.logic import (
     respects_max_places_per_booking,
     competition_is_not_past,
     saveClubs,
-    saveCompetitions
+    saveCompetitions,
 )
 
 
@@ -33,7 +33,9 @@ def showSummary():
         flash("Email invalide")
         return render_template("index.html")
 
-    return render_template("welcome.html", club=club, competitions=competitions)
+    return render_template(
+        "welcome.html", club=club, competitions=competitions, clubs=clubs, show_clubs_dashboard=True
+    )
 
 
 @app.route("/book/<competition>/<club>")
@@ -79,7 +81,9 @@ def purchasePlaces():
     return render_template("welcome.html", club=club, competitions=competitions)
 
 
-# TODO: Add route for points display
+@app.route("/clubs")
+def clubs_dashboard():
+    return render_template("clubs_dashboard.html", clubs=clubs)
 
 
 @app.route("/logout")

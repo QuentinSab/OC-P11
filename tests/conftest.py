@@ -11,7 +11,9 @@ from selenium.webdriver.firefox.options import Options
 
 @pytest.fixture(autouse=True)
 def reset_data(request):
-    if "integration" in request.fspath.dirname:
+    test_path = request.fspath.dirname
+
+    if "integration" in test_path or "functional" in test_path:
         with patch("logic.logic.open", create=True):
             server.clubs = [{"name": "Club Test", "points": 10, "email": "test@mail.com"}]
             server.competitions = [{
