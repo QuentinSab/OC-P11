@@ -1,4 +1,4 @@
-# OC-P12
+# OC-P11
 
 This project is a web application built with Flask that allows clubs to register for competitions and book places.
 
