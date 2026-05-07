@@ -95,7 +95,7 @@ And set the host:
 
 ## Documentation
 
-Flask : https://flask.palletsprojects.com/en/stable/
-Pytest : https://docs.pytest.org/en/stable/
-Selenium : https://selenium-python.readthedocs.io/
-Locust : https://docs.locust.io/en/stable/
+- Flask : https://flask.palletsprojects.com/en/stable/
+- Pytest : https://docs.pytest.org/en/stable/
+- Selenium : https://selenium-python.readthedocs.io/
+- Locust : https://docs.locust.io/en/stable/
